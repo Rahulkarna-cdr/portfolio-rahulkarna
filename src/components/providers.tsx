@@ -1,5 +1,6 @@
 "use client";
 
+import Lenis from "lenis";
 import {
   createContext,
   useCallback,
@@ -60,6 +61,33 @@ export function Providers({ children }: { children: React.ReactNode }) {
       media.addEventListener("change", handleChange);
       return () => media.removeEventListener("change", handleChange);
     }
+  }, []);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+
+    const lenis = new Lenis({
+      duration: 1.25,
+      easing: (t) => 1 - Math.pow(1 - t, 3),
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 1.15,
+    });
+
+    let rafId = 0;
+    const raf = (time: number) => {
+      lenis.raf(time);
+      rafId = window.requestAnimationFrame(raf);
+    };
+
+    rafId = window.requestAnimationFrame(raf);
+
+    return () => {
+      window.cancelAnimationFrame(rafId);
+      lenis.destroy();
+    };
   }, []);
 
   const value = useMemo(
