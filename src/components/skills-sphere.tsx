@@ -84,19 +84,35 @@ function SphereCore({ isLight }: { isLight: boolean }) {
   useFrame((_, delta) => {
     const group = groupRef.current;
     if (!group) return;
-    group.rotation.y += delta * 0.12;
-    group.rotation.x += delta * 0.03;
+    // Earth-like axial spin: rotate around one axis (east to west feel).
+    group.rotation.y -= delta * 0.12;
   });
 
   const wireColor = isLight ? "#3b82f6" : "#60a5fa";
   const edgeColor = isLight ? "#60a5fa" : "#7dd3fc";
   const pointColor = isLight ? "#93c5fd" : "#bae6fd";
+  const shellOpacity = isLight ? 0.22 : 0.28;
+  const wireOpacity = isLight ? 0.14 : 0.08;
+  const edgeOpacity = isLight ? 0.16 : 0.2;
+  const pointOpacity = isLight ? 0.55 : 0.75;
 
   return (
-    <group ref={groupRef}>
+    <group ref={groupRef} rotation={[0.28, 0, 0]}>
+      <mesh>
+        <sphereGeometry args={[2.42, 48, 48]} />
+        <meshStandardMaterial
+          color={isLight ? "#dbeafe" : "#0b1f3a"}
+          emissive={isLight ? "#93c5fd" : "#1e3a8a"}
+          emissiveIntensity={isLight ? 0.04 : 0.12}
+          roughness={0.65}
+          metalness={0.05}
+          transparent
+          opacity={shellOpacity}
+        />
+      </mesh>
       <mesh>
         <sphereGeometry args={[2.45, 40, 40]} />
-        <meshBasicMaterial color={wireColor} wireframe transparent opacity={0.08} />
+        <meshBasicMaterial color={wireColor} wireframe transparent opacity={wireOpacity} />
       </mesh>
 
       {edges.map((edge, index) => (
@@ -105,7 +121,7 @@ function SphereCore({ isLight }: { isLight: boolean }) {
           points={[edge[0], edge[1]]}
           color={edgeColor}
           transparent
-          opacity={0.2}
+          opacity={edgeOpacity}
           lineWidth={0.7}
         />
       ))}
@@ -113,13 +129,13 @@ function SphereCore({ isLight }: { isLight: boolean }) {
       {meshPoints.map((point, index) => (
         <mesh key={`point-${index}`} position={point}>
           <sphereGeometry args={[0.025, 8, 8]} />
-          <meshBasicMaterial color={pointColor} transparent opacity={0.75} />
+          <meshBasicMaterial color={pointColor} transparent opacity={pointOpacity} />
         </mesh>
       ))}
 
       {nodes.map((node) => (
         <group key={node.name} position={node.position}>
-          <Html distanceFactor={10} position={[0, 0.26, 0]} center>
+          <Html distanceFactor={10} position={[0, 0, 0]} center occlude>
             <div className="pointer-events-none flex flex-col items-center gap-1 whitespace-nowrap">
               <span className="flex h-8 w-8 items-center justify-center p-1">
                 <img
@@ -130,7 +146,7 @@ function SphereCore({ isLight }: { isLight: boolean }) {
                   decoding="async"
                 />
               </span>
-              <span className="text-[9px] font-semibold text-slate-900 dark:text-slate-200">
+              <span className="text-[8px] font-semibold text-slate-900 dark:text-slate-200">
                 {node.name}
               </span>
             </div>
@@ -167,8 +183,10 @@ export function SkillsSphere() {
           />
         </Canvas>
       </div>
-      <div className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full border border-ink/10 bg-surface/80 px-4 py-1.5 text-xs text-ink-muted backdrop-blur dark:border-white/15 dark:bg-slate-900/80 dark:text-slate-200">
+      <div className="mt-4 flex justify-center">
+        <div className="pointer-events-none rounded-full border border-ink/10 bg-surface/80 px-4 py-1.5 text-xs text-ink-muted backdrop-blur dark:border-white/15 dark:bg-slate-900/80 dark:text-slate-200">
         Drag to explore skills universe
+        </div>
       </div>
     </div>
   );
