@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { site } from "@/data/site";
 
@@ -17,10 +18,17 @@ export function Header() {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link
           href="#top"
-          className="font-display text-lg font-semibold tracking-tight text-ink transition hover:text-accent"
+          className="inline-flex items-center transition hover:opacity-90"
+          aria-label={`${site.name} home`}
         >
-          {site.name.split(" ")[0]}
-          <span className="text-accent">.</span>
+          <Image
+            src="/logoRKe.png"
+            alt={`${site.name} logo`}
+            width={132}
+            height={44}
+            className="w-auto object-contain"
+            priority
+          />
         </Link>
         <nav className="hidden items-center gap-1 md:flex" aria-label="Primary">
           {nav.map((item) => (

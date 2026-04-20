@@ -1,8 +1,8 @@
 "use client";
 
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Html, Line, OrbitControls } from "@react-three/drei";
-import { useMemo, useRef } from "react";
+import { Html, Line } from "@react-three/drei";
+import { useMemo, useRef, type MutableRefObject, type PointerEvent } from "react";
 import type { Group } from "three";
 import { useHtmlThemeLight } from "@/hooks/use-html-theme-light";
 
@@ -70,7 +70,20 @@ function createEdges(points: [number, number, number][]) {
   return edges;
 }
 
-function SphereCore({ isLight }: { isLight: boolean }) {
+type RotationTarget = {
+  x: number;
+  y: number;
+};
+
+function SphereCore({
+  isLight,
+  rotationTarget,
+  isDragging,
+}: {
+  isLight: boolean;
+  rotationTarget: MutableRefObject<RotationTarget>;
+  isDragging: MutableRefObject<boolean>;
+}) {
   const groupRef = useRef<Group>(null);
 
   const nodes = useMemo<SkillNode[]>(() => {
@@ -84,8 +97,13 @@ function SphereCore({ isLight }: { isLight: boolean }) {
   useFrame((_, delta) => {
     const group = groupRef.current;
     if (!group) return;
-    // Earth-like axial spin: rotate around one axis (east to west feel).
-    group.rotation.y -= delta * 0.12;
+
+    if (!isDragging.current) {
+      rotationTarget.current.y -= delta * 0.08;
+    }
+
+    group.rotation.x += (rotationTarget.current.x - group.rotation.x) * 0.12;
+    group.rotation.y += (rotationTarget.current.y - group.rotation.y) * 0.12;
   });
 
   const wireColor = isLight ? "#3b82f6" : "#60a5fa";
@@ -159,10 +177,44 @@ function SphereCore({ isLight }: { isLight: boolean }) {
 
 export function SkillsSphere() {
   const isLight = useHtmlThemeLight();
+  const isDragging = useRef(false);
+  const lastPointer = useRef({ x: 0, y: 0 });
+  const rotationTarget = useRef<RotationTarget>({ x: 0.28, y: 0 });
+
+  const handlePointerDown = (event: PointerEvent<HTMLDivElement>) => {
+    isDragging.current = true;
+    lastPointer.current = { x: event.clientX, y: event.clientY };
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+
+  const handlePointerMove = (event: PointerEvent<HTMLDivElement>) => {
+    if (!isDragging.current) return;
+    const dx = event.clientX - lastPointer.current.x;
+    const dy = event.clientY - lastPointer.current.y;
+
+    rotationTarget.current.y += dx * 0.006;
+    rotationTarget.current.x += dy * 0.004;
+    rotationTarget.current.x = Math.max(-1.05, Math.min(1.05, rotationTarget.current.x));
+    lastPointer.current = { x: event.clientX, y: event.clientY };
+  };
+
+  const handlePointerUp = (event: PointerEvent<HTMLDivElement>) => {
+    isDragging.current = false;
+    event.currentTarget.releasePointerCapture(event.pointerId);
+  };
 
   return (
     <div className="relative mt-10">
-      <div className="relative h-[540px] w-full">
+      <div
+        className="relative h-[540px] w-full touch-none overflow-hidden cursor-grab active:cursor-grabbing"
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerUp}
+        onPointerLeave={() => {
+          isDragging.current = false;
+        }}
+      >
         <Canvas camera={{ position: [0, 0, 8], fov: 42 }}>
           <ambientLight intensity={0.45} />
           <pointLight position={[5, 5, 5]} intensity={1.2} color="#93c5fd" />
@@ -171,19 +223,14 @@ export function SkillsSphere() {
             intensity={0.7}
             color={isLight ? "#60a5fa" : "#fb923c"}
           />
-          <SphereCore isLight={isLight} />
-          <OrbitControls
-            enablePan={false}
-            enableZoom={false}
-            autoRotate
-            autoRotateSpeed={0.2}
-            rotateSpeed={0.2}
-            minPolarAngle={Math.PI / 2.2}
-            maxPolarAngle={Math.PI / 1.8}
+          <SphereCore
+            isLight={isLight}
+            rotationTarget={rotationTarget}
+            isDragging={isDragging}
           />
         </Canvas>
       </div>
-      <div className="mt-4 flex justify-center">
+      <div className="mt-12 flex justify-center">
         <div className="pointer-events-none rounded-full border border-ink/10 bg-surface/80 px-4 py-1.5 text-xs text-ink-muted backdrop-blur dark:border-white/15 dark:bg-slate-900/80 dark:text-slate-200">
         Drag to explore skills universe
         </div>

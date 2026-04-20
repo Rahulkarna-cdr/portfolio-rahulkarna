@@ -30,6 +30,113 @@ body {
   @apply bg-surface text-ink antialiased;
 }
 
+.background-fx {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.background-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.46;
+  background-image:
+    linear-gradient(to right, rgb(59 130 246 / 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(59 130 246 / 0.08) 1px, transparent 1px);
+  background-size: 48px 48px;
+  animation: gridDrift 70s linear infinite;
+}
+
+.dark .background-grid {
+  opacity: 0.34;
+  background-image:
+    linear-gradient(to right, rgb(56 189 248 / 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(56 189 248 / 0.07) 1px, transparent 1px);
+}
+
+.background-flow {
+  position: absolute;
+  inset: -10%;
+  opacity: 0.22;
+  filter: blur(50px);
+  background:
+    radial-gradient(42% 36% at 22% 28%, rgb(59 130 246 / 0.14), transparent 72%),
+    radial-gradient(42% 34% at 76% 78%, rgb(14 165 233 / 0.12), transparent 74%);
+  transform-origin: 50% 50%;
+  animation: flowDrift 28s ease-in-out infinite;
+}
+
+.dark .background-flow {
+  opacity: 0.2;
+  background:
+    radial-gradient(42% 36% at 22% 28%, rgb(56 189 248 / 0.16), transparent 72%),
+    radial-gradient(42% 34% at 76% 78%, rgb(37 99 235 / 0.16), transparent 74%);
+}
+
+.background-noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.1;
+  background-image: radial-gradient(rgb(30 64 175 / 0.18) 0.55px, transparent 0.55px);
+  background-size: 3px 3px;
+}
+
+.dark .background-noise {
+  opacity: 0.08;
+  background-image: radial-gradient(rgb(125 211 252 / 0.22) 0.6px, transparent 0.6px);
+}
+
+.background-glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      540px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgb(37 99 235 / 0.14),
+      rgb(37 99 235 / 0.02) 45%,
+      transparent 75%
+    );
+}
+
+.dark .background-glow {
+  background:
+    radial-gradient(
+      560px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgb(14 165 233 / 0.12),
+      rgb(14 165 233 / 0.015) 48%,
+      transparent 76%
+    );
+}
+
+@keyframes flowDrift {
+  0%,
+  100% {
+    translate: -1% -1%;
+  }
+  50% {
+    translate: 1% 1%;
+  }
+}
+
+@keyframes gridDrift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-48px, -24px, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .background-grid,
+  .background-flow {
+    animation: none;
+  }
+}
+
 @layer utilities {
   .bg-grid {
     background-size: 48px 48px;
