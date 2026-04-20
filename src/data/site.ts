@@ -3,11 +3,11 @@ export const site = {
   role: "Full-Stack Engineer",
   /** One-liner for meta + hero */
   tagline:
-    "I help teams ship reliable web products with clear UX, solid architecture, and measurable performance.",
+    "I build fullstack web apps, working across frontend, backend, databases, APIs, and deployment, with a focus on making things reliable and easy to maintain.",
   url: "https://example.com",
-  location: "Remote",
+  location: "Bhaktapur, Nepal",
   openToWork: true,
-  email: "hello@example.com",
+  email: "rahulkarna89@gmail.com",
   resumeUrl: "/resume.pdf",
   resumeUpdated: "April 2026",
   social: {

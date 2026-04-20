@@ -24,9 +24,9 @@ export function Header() {
           <Image
             src="/logoRKe.png"
             alt={`${site.name} logo`}
-            width={132}
-            height={44}
-            className="w-auto object-contain"
+            width={96}
+            height={32}
+            className="h-8 w-auto object-contain sm:h-9"
             priority
           />
         </Link>
@@ -43,12 +43,6 @@ export function Header() {
         </nav>
         <div className="flex items-center gap-2">
           <ThemeToggle />
-          <Link
-            href="#contact"
-            className="hidden rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white shadow-glow transition hover:brightness-110 sm:inline-flex"
-          >
-            Let&apos;s talk
-          </Link>
         </div>
       </div>
     </header>

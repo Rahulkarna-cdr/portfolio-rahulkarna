@@ -1,6 +1,8 @@
 import Link from "next/link";
-import { heroCode, site, stats } from "@/data/site";
+import { heroCode, site } from "@/data/site";
 import { TypingCodeBlock } from "@/components/typing-code-block";
+import { AnimatedRoles } from "@/components/animated-roles";
+import { ScrollReveal } from "@/components/scroll-reveal";
 
 export function HeroSection() {
   return (
@@ -10,7 +12,8 @@ export function HeroSection() {
     >
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-accent/5 via-transparent to-transparent dark:from-accent/10" />
       <div className="relative mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-2 md:items-center md:py-24">
-        <div>
+        <ScrollReveal>
+          <div>
           {site.openToWork ? (
             <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent-soft/60 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-accent dark:bg-accent-soft/40">
               <span className="relative flex h-2 w-2">
@@ -21,11 +24,20 @@ export function HeroSection() {
             </p>
           ) : null}
           <h1 className="font-display text-4xl font-bold tracking-tight text-ink sm:text-5xl lg:text-6xl">
-            Building{" "}
+            Hello, I'm{" "}
             <span className="bg-gradient-to-r from-accent to-sky-400 bg-clip-text text-transparent dark:to-blue-300">
-              reliable
+              Rahul Karna
             </span>{" "}
-            digital products.
+          <span className="mt-2 block h-10 text-[1.05rem] leading-none text-accent sm:text-[1.25rem]">
+            <AnimatedRoles
+              roles={[
+                "Full-stack Developer",
+                "Building AI and RAG Systems",
+                "Scalable Architectures",
+              ]}
+            />
+          </span>
+    
           </h1>
           <p className="mt-5 max-w-xl text-lg text-ink-muted">{site.tagline}</p>
           <div className="mt-8 flex flex-wrap gap-3">
@@ -36,24 +48,17 @@ export function HeroSection() {
               View work
             </Link>
             <Link
-              href={site.resumeUrl}
+              href="#contact"
               className="inline-flex items-center justify-center rounded-xl border border-ink/15 bg-surface-muted/80 px-5 py-3 text-sm font-semibold text-ink transition hover:border-accent/40 hover:text-accent dark:border-white/15 dark:bg-surface-muted/40"
             >
-              Download CV
+              Let&apos;s Connect
             </Link>
           </div>
-          <dl className="mt-10 grid grid-cols-3 gap-4 border-t border-ink/10 pt-8 dark:border-white/10">
-            {stats.map((s) => (
-              <div key={s.label}>
-                <dt className="text-xs font-medium uppercase tracking-wide text-ink-muted">{s.label}</dt>
-                <dd className="mt-1 font-display text-xl font-semibold text-ink">{s.value}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-        <div className="relative flex w-full justify-center md:justify-end">
+          </div>
+        </ScrollReveal>
+        <ScrollReveal delay={120} className="relative flex w-full justify-center md:justify-end">
           <TypingCodeBlock code={heroCode} className="w-full max-w-lg" />
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );
