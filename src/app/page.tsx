@@ -1,4 +1,5 @@
 import { Header } from "@/components/header";
+import { BackgroundFX } from "@/components/background-fx";
 import { HeroSection } from "@/components/hero-section";
 import { AboutSection } from "@/components/sections/about";
 import { SkillsSection } from "@/components/sections/skills";
@@ -10,9 +11,10 @@ import { Footer } from "@/components/footer";
 
 export default function HomePage() {
   return (
-    <>
+    <div className="relative isolate">
+      <BackgroundFX />
       <Header />
-      <main>
+      <main className="relative z-10">
         <HeroSection />
         <AboutSection />
         <SkillsSection />
@@ -22,6 +24,6 @@ export default function HomePage() {
         <ContactSection />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

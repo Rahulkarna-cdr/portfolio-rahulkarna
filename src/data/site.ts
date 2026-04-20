@@ -71,26 +71,30 @@ export const skills: {
 
 export const experience = [
   {
-    title: "Senior Software Engineer",
-    company: "Acme Labs",
-    location: "Remote",
-    start: "2023",
+    title: "Junior Software Engineer",
+    company: "T.E.J Center Private Limited",
+    location: "Lalitpur, Nepal",
+    start: "January 2026",
     end: "Present",
     bullets: [
-      "Led migration to Next.js App Router; improved LCP by 38% on key flows.",
-      "Owned billing microservice design; cut incident rate 25% via SLOs and alerts.",
-      "Mentored 3 engineers on TypeScript patterns and code review standards.",
+      "Built a full-stack observability platform to collect, process, and visualize client metrics.",
+      "Implemented a scalable data pipeline to ingest and store client metrics in a PostgreSQL database.",
+      "Developed a user-friendly dashboard to visualize client metrics in real-time.",
+      "Designed and implemented a scalable backend architecture (Node.js/Express) with modular structure and clean separation of concerns.",
+      "Implemented Multitenant architecture to support multiple clients with different data and authentication requirements.",
     ],
   },
   {
-    title: "Software Engineer",
-    company: "Northwind Digital",
-    location: "Hybrid",
-    start: "2020",
-    end: "2023",
+    title: "Software Engineer Fellow",
+    company: "T.E.J Center Private Limited",
+    location: "Lalitpur, Nepal",
+    start: "July 2025",
+    end: "December 2025",
     bullets: [
-      "Built customer dashboards in React with real-time updates over WebSockets.",
-      "Introduced integration test suite; reduced regressions in release train.",
+      "Developed full-stack MERN applications featuring JWT-based authentication, CRUD functionality, dashboards, and real-time updates, following sound system design principles.",
+      "Built RAG-based AI chatbot using OpenAI's API and Langchain libraries to provide contextual and accurate responses to user queries.",
+      "Architected a scalable system using a microservices approach, improving maintainability and reducing system downtime.",      
+
     ],
   },
 ];
