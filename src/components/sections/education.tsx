@@ -1,6 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
-import { certifications, education, site } from "@/data/site";
+import { certifications, education } from "@/data/site";
 import { ScrollReveal } from "@/components/scroll-reveal";
 
 function isExternalCredentialHref(href: string) {
@@ -71,20 +70,6 @@ export function EducationSection() {
                 </li>
               ))}
             </ul>
-            <ScrollReveal delay={220}>
-              <div className="mt-10 rounded-2xl border border-ink/10 bg-surface-muted/50 p-6 dark:border-white/10 dark:bg-surface-muted/30">
-                <h3 className="font-display text-lg font-semibold text-ink">Resume</h3>
-                <p className="mt-2 text-sm text-ink-muted">
-                  Last updated: {site.resumeUpdated}
-                </p>
-                <Link
-                  href={site.resumeUrl}
-                  className="mt-4 inline-flex rounded-xl bg-accent px-4 py-2 text-sm font-semibold text-white hover:brightness-110"
-                >
-                  View / download PDF
-                </Link>
-              </div>
-            </ScrollReveal>
           </ScrollReveal>
         </div>
       </div>
