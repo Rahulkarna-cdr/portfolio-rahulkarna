@@ -15,15 +15,23 @@ export const site = {
     linkedin: "https://www.linkedin.com/",
     twitter: "https://twitter.com/",
   },
-  /** Shown in About; replace with /your-photo.jpg in public/ when ready */
-  avatarSrc: "/avatar-placeholder.svg",
+  /** Shown in About */
+  avatarSrc: "/aboutMeEmoji.png",
 };
 
-export const heroCode = `const builder = {
-  name: "${site.name}",
-  focus: "Next.js · Systems · UX",
-  shipping: true,
-};`;
+/** Hero terminal animation (bash-style) */
+export const heroCode = `$ whoami
+Rahul Karna
+
+$ role
+Fullstack Developer
+
+$ focus
+APIs, real-time systems, web apps
+
+$ status
+Open to opportunities
+`;
 
 export const stats = [
   { label: "Projects shipped", value: "12+" },
@@ -131,24 +139,26 @@ export const projects = [
 
 export const education = [
   {
-    degree: "B.Tech, Computer Science",
-    school: "Your University",
-    period: "2016 — 2020",
+    degree: "Bachelor of Electronics, Communication and Information Engineering",
+    school: "Tribhuvan University",
+    period: "2020-2025",
     detail: "Focus: distributed systems & software engineering",
   },
 ];
 
 export const certifications = [
   {
-    name: "AWS Certified Developer – Associate",
-    issuer: "Amazon Web Services",
+    name: "Full Stack Open",
+    issuer: "University of Helsinki",
     year: "2025",
-    href: "#",
+    imageSrc: "/certificates/FullstackOpen.png",
+    href: "https://studies.cs.helsinki.fi/stats/api/certificate/fullstackopen/en/2f19d77625c8dcab62bf5a17df5dc525",
   },
   {
-    name: "Meta Front-End Developer",
-    issuer: "Coursera",
-    year: "2024",
-    href: "#",
+    name: "Introduction to Cybersecurity",
+    issuer: "Cisco · Credly",
+    year: "2023",
+    imageSrc: "/certificates/Cisco_Cybersecurity.png",
+    href: "https://www.credly.com/badges/120b4482-77a2-44f5-8f2b-98af27a7b04d/linked_in_profile",
   },
 ];
