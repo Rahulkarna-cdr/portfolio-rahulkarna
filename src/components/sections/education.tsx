@@ -1,6 +1,11 @@
+import Image from "next/image";
 import Link from "next/link";
 import { certifications, education, site } from "@/data/site";
 import { ScrollReveal } from "@/components/scroll-reveal";
+
+function isExternalCredentialHref(href: string) {
+  return href.startsWith("http://") || href.startsWith("https://");
+}
 
 export function EducationSection() {
   return (
@@ -29,19 +34,39 @@ export function EducationSection() {
           </ScrollReveal>
           <ScrollReveal delay={160}>
             <h3 className="text-sm font-semibold uppercase tracking-wide text-ink-muted">Certifications</h3>
-            <ul className="mt-4 space-y-3">
+            <ul className="mt-4 space-y-6">
               {certifications.map((c, index) => (
                 <li key={c.name}>
-                  <ScrollReveal delay={index * 100}>
-                    <Link
-                      href={c.href}
-                      className="flex flex-col rounded-xl border border-ink/10 bg-surface-muted/50 px-4 py-3 transition hover:border-accent/40 dark:border-white/10 dark:bg-surface-muted/30"
-                    >
-                      <span className="font-medium text-ink">{c.name}</span>
-                      <span className="text-sm text-ink-muted">
-                        {c.issuer} · {c.year}
-                      </span>
-                    </Link>
+                  <ScrollReveal delay={index * 130}>
+                    <article className="group overflow-hidden rounded-xl border border-ink/10 bg-surface-muted/50 shadow-card-light transition duration-300 ease-out hover:-translate-y-1 hover:border-accent/35 hover:shadow-glow dark:border-white/10 dark:bg-surface-muted/30 dark:shadow-card">
+                      <div className="relative aspect-[4/3] w-full bg-surface-muted dark:bg-slate-900/60">
+                        <Image
+                          src={c.imageSrc}
+                          alt={`${c.name} certificate`}
+                          fill
+                          className="object-contain p-3 transition duration-500 ease-out group-hover:scale-[1.03]"
+                          sizes="(max-width: 1024px) 100vw, 40vw"
+                        />
+                      </div>
+                      <div className="border-t border-ink/5 p-4 dark:border-white/5">
+                        <h4 className="font-display font-semibold text-ink transition-colors duration-300 group-hover:text-accent">
+                          {c.name}
+                        </h4>
+                        <p className="mt-1 text-sm text-ink-muted">
+                          {c.issuer} · {c.year}
+                        </p>
+                        {isExternalCredentialHref(c.href) ? (
+                          <a
+                            href={c.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="mt-4 inline-flex rounded-lg bg-accent px-3 py-2 text-sm font-semibold text-white transition duration-300 hover:brightness-110"
+                          >
+                            View certificate
+                          </a>
+                        ) : null}
+                      </div>
+                    </article>
                   </ScrollReveal>
                 </li>
               ))}

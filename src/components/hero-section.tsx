@@ -57,7 +57,7 @@ export function HeroSection() {
           </div>
         </ScrollReveal>
         <ScrollReveal delay={120} className="relative flex w-full justify-center md:justify-end">
-          <TypingCodeBlock code={heroCode} className="w-full max-w-lg" />
+          <TypingCodeBlock code={heroCode} language="bash" className="w-full max-w-lg" />
         </ScrollReveal>
       </div>
     </section>

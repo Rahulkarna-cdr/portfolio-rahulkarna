@@ -11,10 +11,17 @@ type Props = {
   code: string;
   /** Prism language id */
   language?: string;
+  /** Title shown in the faux window chrome (e.g. bash) */
+  windowTitle?: string;
   className?: string;
 };
 
-export function TypingCodeBlock({ code, language = "tsx", className = "" }: Props) {
+export function TypingCodeBlock({
+  code,
+  language = "tsx",
+  windowTitle = "bash",
+  className = "",
+}: Props) {
   const isLight = useHtmlThemeLight();
   const [mounted, setMounted] = useState(false);
   const [length, setLength] = useState(0);
@@ -45,7 +52,7 @@ export function TypingCodeBlock({ code, language = "tsx", className = "" }: Prop
         <span className="h-3 w-3 rounded-full bg-[#febc2e]" aria-hidden />
         <span className="h-3 w-3 rounded-full bg-[#28c840]" aria-hidden />
         <span className="ml-3 font-mono text-[11px] font-medium text-slate-600 dark:text-sky-300">
-          portfolio.tsx
+          {windowTitle}
         </span>
       </div>
       <Highlight theme={prismTheme} code={visible} language={language}>
