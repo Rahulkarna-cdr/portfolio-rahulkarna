@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { site } from "@/data/site";
 import { ScrollReveal } from "@/components/scroll-reveal";
+import { GithubLogo, GmailLogo, LinkedinLogo } from "@/components/social-brand-icons";
 
 export function ContactSection() {
   return (
@@ -28,20 +29,36 @@ export function ContactSection() {
           <ScrollReveal delay={180}>
             <div className="rounded-2xl border border-ink/10 bg-gradient-to-br from-accent/10 via-surface-muted/50 to-transparent p-8 dark:border-white/10 dark:from-accent/15">
               <p className="text-sm font-semibold uppercase tracking-wide text-ink-muted">Social</p>
-              <ul className="mt-4 space-y-3">
+              <ul className="mt-4 flex flex-wrap items-center gap-3" role="list">
                 <li>
-                  <Link href={site.social.github} className="font-medium text-ink hover:text-accent" target="_blank" rel="noreferrer">
-                    GitHub →
+                  <Link
+                    href={site.social.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="GitHub profile"
+                    className="inline-flex h-12 w-12 items-center justify-center rounded-xl border border-ink/15 bg-surface-muted/60 text-ink shadow-sm transition hover:border-accent/45 hover:text-accent hover:shadow-glow dark:border-white/15 dark:bg-surface-muted/40"
+                  >
+                    <GithubLogo className="h-6 w-6" />
                   </Link>
                 </li>
                 <li>
-                  <Link href={site.social.linkedin} className="font-medium text-ink hover:text-accent" target="_blank" rel="noreferrer">
-                    LinkedIn →
+                  <Link
+                    href={site.social.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn profile"
+                    className="inline-flex h-12 w-12 items-center justify-center rounded-xl border border-ink/15 bg-surface-muted/60 text-ink shadow-sm transition hover:border-accent/45 hover:text-accent hover:shadow-glow dark:border-white/15 dark:bg-surface-muted/40"
+                  >
+                    <LinkedinLogo className="h-6 w-6" />
                   </Link>
                 </li>
                 <li>
-                  <Link href={site.social.twitter} className="font-medium text-ink hover:text-accent" target="_blank" rel="noreferrer">
-                    Twitter / X →
+                  <Link
+                    href={`mailto:${site.email}`}
+                    aria-label="Email via Gmail"
+                    className="inline-flex h-12 w-12 items-center justify-center rounded-xl border border-ink/15 bg-surface-muted/60 text-ink shadow-sm transition hover:border-accent/45 hover:text-accent hover:shadow-glow dark:border-white/15 dark:bg-surface-muted/40"
+                  >
+                    <GmailLogo className="h-6 w-6" />
                   </Link>
                 </li>
               </ul>

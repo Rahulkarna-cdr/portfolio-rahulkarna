@@ -7,13 +7,10 @@ export const site = {
   url: "https://example.com",
   location: "Bhaktapur, Nepal",
   openToWork: true,
-  email: "rahulkarna89@gmail.com",
-  resumeUrl: "/resume.pdf",
-  resumeUpdated: "April 2026",
+  email: "rahulkarna889@gmail.com",
   social: {
-    github: "https://github.com/",
-    linkedin: "https://www.linkedin.com/",
-    twitter: "https://twitter.com/",
+    github: "https://github.com/rahulkarna-cdr",
+    linkedin: "https://www.linkedin.com/in/rahul-karna",
   },
   /** Shown in About */
   avatarSrc: "/aboutMeEmoji.png",
@@ -41,10 +38,10 @@ export const stats = [
 
 export const about = {
   lead:
-    "I build production web apps end to end—frontend polish, API design, data modeling, and deployment—with an eye for maintainability.",
+    "I am a Junior Full-Stack Developer passionate about building functional, clean web applications. Having spent the last year diving deep into the modern web ecosystem, I have developed a strong foundation in frontend Polish and backend logic",
   body:
-    "I care about fast feedback loops, accessible interfaces, and observability so teams can iterate safely. Currently deepening skills in edge performance and design systems.",
-  learning: "Exploring distributed tracing and advanced Next.js patterns.",
+    "I focus on writing clean, maintainable code and building web apps that are easy to use and reliable. I try to keep things simple and practical, and I enjoy working through problems to find solid solutions.",
+  learning: "Exploring System Design concepts and improving how I build web apps, especially around APIs, real-time features, and performance.",
 };
 
 export const skillCategories = [
@@ -109,31 +106,26 @@ export const experience = [
 
 export const projects = [
   {
-    title: "Commerce Control Tower",
-    impact: "Sub-200ms P95 for catalog reads at peak",
+    title: "Facebook Style NewsFeed with Pull Model ",
+    impact: "Reduced database load using pull-based feed design",
     description:
-      "Event-driven inventory and order orchestration with read replicas, cache layers, and idempotent workers.",
-    stack: ["Next.js", "Node.js", "PostgreSQL", "Redis", "Kafka"],
-    imageSrc: "/projects/commerce.svg",
-    links: { live: "#", repo: "#" },
+      "A pull-based newsfeed system that dynamically builds user timelines from followed users’ posts at request time.",
+    stack: ["Javascript", "Node.js", "PostgreSQL", "Redis", "Kafka", "docker", "microservices"],
+    links: { repo: "https://github.com/TEJ-Fellowship/pbl/tree/newFacebookMain/PBL5/4_Facebook_Newsfeed" },
   },
   {
-    title: "Insight Atlas",
-    impact: "40% faster analyst workflows",
-    description:
-      "Analytics workspace with saved views, role-based sharing, and export pipelines.",
-    stack: ["React", "TypeScript", "Python", "BigQuery"],
-    imageSrc: "/projects/insight.svg",
-    links: { live: "#", repo: "#" },
+    title: "Vizme - Unified Observability Platform",
+    impact: "Enabled centralized monitoring and faster detection of system issues through real-time metrics aggregation",
+    description: "A unified observability platform that collects and visualizes system and application metrics to provide real-time insights into performance and health.",
+    stack: ["JavaScript", "Node.js", "PostgreSQL", "Docker", "Prometheus", "Grafana", "Mimir"],
+    links: { repo: "https://github.com/ganesh-786/Vizme/" },
   },
   {
-    title: "Assist Desk",
-    impact: "Answer suggestion latency under 2s",
-    description:
-      "Support console with retrieval-augmented answers, audit trails, and human handoff.",
-    stack: ["Next.js", "OpenAI", "pgvector", "Tailwind"],
-    imageSrc: "/projects/assist.svg",
-    links: { live: "#", repo: "#" },
+    title: "Ripple - One Tap Social Chain",
+    impact: "Built a viral interaction model enabling synchronous user engagement through minimal input actions",
+    description: "A social networking platform where users trigger and propagate engagement waves with a single action, creating chain-based real-time interaction across connected users.",
+    stack: ["JavaScript", "Node.js", "React", "MongoDB", "JWT", "Redux"],
+    links: { repo: "https://github.com/TEJ-Fellowship/pbl/tree/main/PBL3/ripple" },
   },
 ];
 

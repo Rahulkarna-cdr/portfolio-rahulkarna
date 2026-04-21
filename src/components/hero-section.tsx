@@ -1,8 +1,8 @@
-import Link from "next/link";
 import { heroCode, site } from "@/data/site";
 import { TypingCodeBlock } from "@/components/typing-code-block";
 import { AnimatedRoles } from "@/components/animated-roles";
 import { ScrollReveal } from "@/components/scroll-reveal";
+import { InPageLink } from "@/components/in-page-link";
 
 export function HeroSection() {
   return (
@@ -41,18 +41,18 @@ export function HeroSection() {
           </h1>
           <p className="mt-5 max-w-xl text-lg text-ink-muted">{site.tagline}</p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              href="#projects"
+            <InPageLink
+              sectionId="projects"
               className="inline-flex items-center justify-center rounded-xl bg-accent px-5 py-3 text-sm font-semibold text-white shadow-glow transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
               View work
-            </Link>
-            <Link
-              href="#contact"
+            </InPageLink>
+            <InPageLink
+              sectionId="contact"
               className="inline-flex items-center justify-center rounded-xl border border-ink/15 bg-surface-muted/80 px-5 py-3 text-sm font-semibold text-ink transition hover:border-accent/40 hover:text-accent dark:border-white/15 dark:bg-surface-muted/40"
             >
               Let&apos;s Connect
-            </Link>
+            </InPageLink>
           </div>
           </div>
         </ScrollReveal>
